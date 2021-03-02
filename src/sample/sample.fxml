@@ -13,7 +13,8 @@
         </HBox>
         <ScrollPane prefHeight="212.0" prefWidth="495.0">
            <content>
-             <TableView fx:id="result_table"></TableView>
+             <TableView fx:id="result_table" prefHeight="211.0" prefWidth="490.0">
+           </TableView>
            </content>
         </ScrollPane>
      </children>

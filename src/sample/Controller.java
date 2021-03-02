@@ -27,58 +27,24 @@ public class Controller implements Initializable {
     private Button goBtn;
 
     @FXML //fx:id="result_table"
-    private TableView result_table;
+    private TableView<ObservableList> result_table;
 
     private List<String> columnNames = new ArrayList<>();
 
-//    @FXML //fx:id="empNoColumn"
-//    private TableColumn<Employee, Integer> empNoColumn;
-//
-//    @FXML //fx:id="birthDateColumn"
-//    private TableColumn<Employee, String> birthDateColumn;
-//
-//    @FXML //fx:id="firstNameColumn"
-//    private TableColumn<Employee, String> firstNameColumn;
-//
-//    @FXML //fx:id="lastNameColumn"
-//    private TableColumn<Employee, String> lastNameColumn;
-//
-//    @FXML //fx:id="genderColumn"
-//    private TableColumn<Employee, String> genderColumn;
-//
-//    @FXML //fx:id="hireDateColumn"
-//    private TableColumn<Employee, String> hireDateColumn;
 
     public void DBTest() {
         String conn_url = "jdbc:mysql://localhost:3306/employees?user=root&password=&serverTimezone=UTC";
         Connection conn = null;
-
-//        ObservableList<Employee> data = FXCollections.observableArrayList();
         try {
             conn = DriverManager.getConnection(conn_url);
-            String cmd = this.sqlCode.getText();
+            String cmd = sqlCode.getText();
 
             PreparedStatement stmt = conn.prepareStatement(cmd);
 
             ResultSet rs = stmt.executeQuery();
-            result_table = new TableView<>();
-
-//            while (rs != null && rs.next()) {
-//                int empNo = Integer.parseInt(rs.getString(1));
-//                String birthDate = rs.getString(2);
-//                String firstName = rs.getString(3);
-//                String lastName = rs.getString(4);
-//                String gender = rs.getString(5);
-//                String hireDate = rs.getString(6);
-//                System.out.println(empNo + " " + birthDate + " " + firstName + " " + lastName + " " + gender + " " + hireDate);
-//
-//                Employee empRow = new Employee(empNo, birthDate, firstName, lastName, gender, hireDate);
-//                data.add(empRow);
-//            }
-//            result_table.setItems(data);
-
 
             ObservableList<ObservableList> data = FXCollections.observableArrayList();
+            result_table.getColumns().clear();
 
             for (int i = 0; i < rs.getMetaData().getColumnCount(); i++) {
 
@@ -91,9 +57,8 @@ public class Controller implements Initializable {
                         return null;
                     }
                 });
-
-                this.result_table.getColumns().addAll(col);
-                this.columnNames.add(col.getText());
+                result_table.getColumns().addAll(col);
+                columnNames.add(col.getText());
             }
 
             while (rs.next()) {
@@ -106,9 +71,9 @@ public class Controller implements Initializable {
                 data.add(row);
 
             }
-
+            result_table.getItems().clear();
             //FINALLY ADDED TO TableView
-            this.result_table.setItems(data);
+            result_table.setItems(data);
 
             System.out.println("result");
             System.out.println(result_table);
@@ -132,60 +97,5 @@ public class Controller implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-//        empNoColumn = new TableColumn<>();
-//        birthDateColumn = new TableColumn<>();
-//        firstNameColumn = new TableColumn<>();
-//        lastNameColumn = new TableColumn<>();
-//        genderColumn = new TableColumn<>();
-//        hireDateColumn = new TableColumn<>();
-//
-//        empNoColumn.setCellValueFactory(new PropertyValueFactory<>("empNoColumn"));
-//        birthDateColumn.setCellValueFactory(new PropertyValueFactory<>("birthDateColumn"));
-//        firstNameColumn.setCellValueFactory(new PropertyValueFactory<>("firstNameColumn"));
-//        lastNameColumn.setCellValueFactory(new PropertyValueFactory<>("lastNameColumn"));
-//        genderColumn.setCellValueFactory(new PropertyValueFactory<>("genderColumn"));
-//        hireDateColumn.setCellValueFactory(new PropertyValueFactory<>("hireDateColumn"));
-
-//        String conn_url = "jdbc:mysql://localhost:3306/employees?user=root&password=&serverTimezone=UTC";
-//        Connection conn = null;
-//        ObservableList<Employee> data = FXCollections.observableArrayList();
-//        try {
-//            conn = DriverManager.getConnection(conn_url);
-//            String cmd = "select * from employees limit 10;";
-//
-//            PreparedStatement stmt = conn.prepareStatement(cmd);
-//            ResultSet rs = stmt.executeQuery();
-////            ResultSet rs = conn.createStatement().executeQuery(cmd);
-//            result_table = new TableView<>();
-//
-//            while (rs != null && rs.next()) {
-//                int empNo = Integer.parseInt(rs.getString("emp_no"));
-//                String birthDate = rs.getString("birth_date");
-//                String firstName = rs.getString("first_name");
-//                String lastName = rs.getString("last_name");
-//                String gender = rs.getString("gender");
-//                String hireDate = rs.getString("hire_date");
-//                System.out.println(empNo + " " + birthDate + " " + firstName + " " + lastName + " " + gender + " " + hireDate);
-//
-//                Employee empRow = new Employee(empNo, birthDate, firstName, lastName, gender, hireDate);
-//                data.add(empRow);
-//            }
-//
-//            result_table.setItems(data);
-//
-//            System.out.println("result");
-//            System.out.println(result_table);
-//
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        } finally {
-//            if (conn != null) {
-//                try {
-//                    conn.close();
-//                } catch (SQLException e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//        }
     }
 }
