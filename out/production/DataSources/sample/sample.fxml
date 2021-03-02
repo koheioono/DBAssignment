@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<FlowPane alignment="center" hgap="10" prefHeight="317.0" prefWidth="494.0" vgap="10" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+     <children>
+        <TextArea fx:id="sqlCode" prefHeight="109.0" prefWidth="369.0" />
+        <HBox prefHeight="109.0" prefWidth="116.0" style="-fx-padding: 40;">
+           <children>
+              <Button fx:id="goBtn" mnemonicParsing="false" onMouseClicked="#buttonPressed" prefHeight="27.0" prefWidth="49.0" text="Go" />
+           </children>
+        </HBox>
+        <ScrollPane prefHeight="212.0" prefWidth="495.0">
+           <content>
+             <TableView fx:id="result_table"></TableView>
+           </content>
+        </ScrollPane>
+     </children>
+</FlowPane>
